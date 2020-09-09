@@ -6,6 +6,19 @@ package mu.integration.consumer.rabbitmq;
  */
 public class Pojo {
 
+    public Pojo() {
+        
+    }
+
+    public Pojo(String csvLine) {
+
+        String[] array = csvLine.split(",");
+        this.setCol1(array[0]);
+        this.setCol2(array[1]);
+        this.setCol3(array[2]);
+
+    }
+
     private String col1;
 
     private String col2;
