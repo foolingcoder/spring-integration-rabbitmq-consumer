@@ -1,6 +1,6 @@
 # spring-integration-rabbitmq-consumer
 
-This is the consumer microservice of a message-driven microservices based on the publish/subscribe model using Spring Integration, Spring Cloud Stream and RabbitMQ message broker
+This is the consumer microservice of a message-driven microservices based on the publish/subscribe model using Spring Integration, Spring Cloud Stream and RabbitMQ message broker. 
 It is based on https://piotrminkowski.com/2018/06/15/building-and-testing-message-driven-microservices-using-spring-cloud-stream/
 
 To start the rabbit-mq broker using docker, use the below command:
