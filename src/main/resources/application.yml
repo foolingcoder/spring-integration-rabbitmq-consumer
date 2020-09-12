@@ -6,9 +6,9 @@ spring:
     stream:
       bindings:
         output:
-          destination: orders-in
+          destination: lines-in
         input:
-          destination: orders-out
+          destination: lines-out
       rabbit:
         bindings:
           output:
