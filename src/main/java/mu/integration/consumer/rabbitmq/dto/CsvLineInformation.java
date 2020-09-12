@@ -1,4 +1,4 @@
-package mu.integration.consumer.rabbitmq.entity;
+package mu.integration.consumer.rabbitmq.dto;
 
 import lombok.Data;
 

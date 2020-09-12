@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
-import mu.integration.consumer.rabbitmq.entity.CsvLineInformation;
+import mu.integration.consumer.rabbitmq.dto.CsvLineInformation;
 
 /**
  *

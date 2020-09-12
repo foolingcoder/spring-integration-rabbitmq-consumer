@@ -1,6 +1,6 @@
 package mu.integration.consumer.rabbitmq.service;
 
-import mu.integration.consumer.rabbitmq.entity.CsvLineInformation;
+import mu.integration.consumer.rabbitmq.dto.CsvLineInformation;
 
 /**
  *
