@@ -12,9 +12,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mu.integration.consumer.rabbitmq.dto.CsvLineInformation;
-import mu.integration.consumer.rabbitmq.service.CsvLineInformationSender;
-import mu.integration.consumer.rabbitmq.service.CsvLineValidationService;
+import mu.integration.consumer.rabbitmq.dto.TransportIntegrationVO;
+import mu.integration.consumer.rabbitmq.service.TransportIntegrationSender;
+import mu.integration.consumer.rabbitmq.service.TransportIntegrationService;
 
 /**
  * Receives a message from topic exchange.
@@ -24,23 +24,22 @@ import mu.integration.consumer.rabbitmq.service.CsvLineValidationService;
 @RequiredArgsConstructor
 @Slf4j
 @Component
-public class CsvLineInformationConsumer {
+public class TransportConsumer {
 
-    private final CsvLineValidationService csvLineValidationService;
-    private final CsvLineInformationSender csvLineInformationSender;
+    private final TransportIntegrationService transportIntegrationService;
+    private final TransportIntegrationSender transportIntegrationSender;
     private final ObjectMapper mapper;
 
     @StreamListener(Sink.INPUT)
-    public void receiveOrder(@Header Message<String> header, @Payload CsvLineInformation csvLineInformation)
+    public void receiveOrder(@Header Message<String> header, @Payload TransportIntegrationVO transportIntegrationVO)
             throws JsonProcessingException {
 
-        log.debug("\n\n payload received: {}", mapper.writeValueAsString(csvLineInformation));
-        log.debug("\n\n Header received: {}", header);
+        log.info("\n\n payload received: {}", mapper.writeValueAsString(transportIntegrationVO));
 
         //update csv line information
-        CsvLineInformation updatedCsvLineInformation = csvLineValidationService.validate(csvLineInformation);
+        TransportIntegrationVO updatedTransportIntegrationVO = transportIntegrationService.validate(transportIntegrationVO);
 
-        csvLineInformationSender.send(header, updatedCsvLineInformation);
+        transportIntegrationSender.send(header, updatedTransportIntegrationVO);
 
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
-import mu.integration.consumer.rabbitmq.dto.CsvLineInformation;
+import mu.integration.consumer.rabbitmq.dto.TransportIntegrationVO;
 
 /**
  *
@@ -16,20 +16,20 @@ import mu.integration.consumer.rabbitmq.dto.CsvLineInformation;
 @Transactional(readOnly = true)
 @Slf4j
 @Service
-public class CsvLineValidationServiceImpl implements CsvLineValidationService {
+public class TransportIntegrationServiceImpl implements TransportIntegrationService {
     private static int i = 0;
 
     @Autowired
     private ObjectMapper mapper;
 
     @Override
-    public CsvLineInformation validate(CsvLineInformation csvLineInformation) {
+    public TransportIntegrationVO validate(TransportIntegrationVO transportIntegrationVO) {
 
         if (i++ % 2 == 0) {
-            csvLineInformation.setStatus("SUCCESS");
+            transportIntegrationVO.setStatus("SUCCESS");
         } else {
-            csvLineInformation.setStatus("FAILURE");
+            transportIntegrationVO.setStatus("FAILURE");
         }
-        return csvLineInformation;
+        return transportIntegrationVO;
     }
 }

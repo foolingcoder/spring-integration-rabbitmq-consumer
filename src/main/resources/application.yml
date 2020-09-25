@@ -6,12 +6,16 @@ spring:
     stream:
       bindings:
         output:
-          destination: lines-in
+          destination: mns-trs-transport-in
         input:
-          destination: lines-out
+          destination: mns-trs-transport-out
       rabbit:
         bindings:
           output:
             producer:
-              exchangeType: direct
+              exchangeType: topic
               routingKeyExpression: '"#"'
+
+  rabbitmq:
+    username: guest
+    password: guest
