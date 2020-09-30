@@ -7,15 +7,12 @@ spring:
       bindings:
         output:
           destination: mns-trs-transport-in
+          group: inConsumer
         input:
           destination: mns-trs-transport-out
-      rabbit:
-        bindings:
-          output:
-            producer:
-              exchangeType: topic
-              routingKeyExpression: '"#"'
+          group: outConsumer
+
 
   rabbitmq:
-    username: guest
-    password: guest
+    username: rabbitAdminUser
+    password: rabbitAdminPwd
