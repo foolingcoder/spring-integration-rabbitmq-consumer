@@ -7,6 +7,7 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import mu.integration.consumer.rabbitmq.binder.TransportProcessor;
 import mu.integration.consumer.rabbitmq.dto.TransportIntegrationVO;
 
 /**
@@ -19,7 +20,7 @@ import mu.integration.consumer.rabbitmq.dto.TransportIntegrationVO;
 public class TransportIntegrationSender {
 
     @Autowired
-    private Source source;
+    private TransportProcessor transportProcessor;
 
     public void send(Message<String> header, TransportIntegrationVO updatedCTransportIntegrationVO) {
 
@@ -27,7 +28,7 @@ public class TransportIntegrationSender {
                 .copyHeaders(header.getHeaders())
                 .build();
 
-        log.debug("\n\n CsvLine sent: {}", reply);
-        this.source.output().send(reply);
+        //log.info("\n\n CsvLine sent: {}", reply);
+        this.transportProcessor.flightOutput().send(reply);
     }
 }

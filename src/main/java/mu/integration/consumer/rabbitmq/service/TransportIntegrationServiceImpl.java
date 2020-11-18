@@ -1,5 +1,8 @@
 package mu.integration.consumer.rabbitmq.service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
+import mu.integration.consumer.rabbitmq.constant.FileStatus;
 import mu.integration.consumer.rabbitmq.dto.TransportIntegrationVO;
 
 /**
@@ -26,9 +30,12 @@ public class TransportIntegrationServiceImpl implements TransportIntegrationServ
     public TransportIntegrationVO validate(TransportIntegrationVO transportIntegrationVO) {
 
         if (i++ % 2 == 0) {
-            transportIntegrationVO.setStatus("SUCCESS");
+            transportIntegrationVO.setStatus(FileStatus.SUCCESS);
         } else {
-            transportIntegrationVO.setStatus("FAILURE");
+            transportIntegrationVO.setStatus(FileStatus.FAILURE);
+            Set<String> errorMessage = new HashSet<>();
+            errorMessage.add("error+" + i);
+            transportIntegrationVO.setErrorMessage(errorMessage);
         }
         return transportIntegrationVO;
     }

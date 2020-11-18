@@ -5,14 +5,21 @@ spring:
   cloud:
     stream:
       bindings:
-        output:
-          destination: mns-trs-transport-in
-          group: inConsumer
-        input:
-          destination: mns-trs-transport-out
-          group: outConsumer
-
+        flightOutput:
+          destination: mns-trs-transport-flight-in
+        flightInput:
+          destination: mns-trs-transport-flight-out
+          group: outFlightConsumer
+        cruiseOutput:
+          destination: mns-trs-transport-cruise-in
+        cruiseInput:
+          destination: mns-trs-transport-cruise-out
+          group: outCruiseConsumer
+        integrationResponseInput:
+          destination: mns-trs-transport-integrationResponse-out
+          group: outIntegrationResponseConsumer
 
   rabbitmq:
     username: rabbitAdminUser
     password: rabbitAdminPwd
+    host: localhost
